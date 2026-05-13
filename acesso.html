@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acesso Antecipado - Eclipse Valley</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#050505;color:white;overflow-x:hidden;}
+.gold-gradient{background:linear-gradient(to right,#d4af37,#f6e27a,#c89b3c);}
+.gold-button{background:linear-gradient(to right,#d4af37,#f6e27a,#c89b3c);color:#000;font-weight:700;transition:.3s;}
+.gold-button:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(212,175,55,.25);}
+.gold-border{border:1px solid rgba(212,175,55,.15);}
+.gold-text{background:linear-gradient(to right,#f6e27a,#d4af37,#c89b3c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+</style>
+</head>
+<body>
+<section class="min-h-screen flex items-center justify-center px-6 py-20">
+<div class="max-w-6xl w-full grid lg:grid-cols-2 gap-14 items-center">
+<div>
+<img src="antecipado.png" class="w-full rounded-[30px] border border-[#2f2413]">
+</div>
+<div>
+<div class="inline-flex items-center gap-2 gold-gradient text-black px-5 py-2 rounded-full text-sm font-bold mb-6">VIP EXCLUSIVO</div>
+<h1 class="text-5xl font-black mb-6">Acesso <span class="gold-text">Antecipado</span></h1>
+<p class="text-zinc-400 text-lg leading-relaxed mb-8">Seja o primeiro de todos a viver uma experiência única dentro da Eclipse Valley.</p>
+<div class="space-y-4 mb-10">
+<div class="bg-[#0d0d0d] gold-border rounded-2xl p-5">✔ Entrada antecipada na cidade</div>
+<div class="bg-[#0d0d0d] gold-border rounded-2xl p-5">✔ Vantagem econômica inicial</div>
+<div class="bg-[#0d0d0d] gold-border rounded-2xl p-5">✔ Cargo especial no Discord</div>
+<div class="bg-[#0d0d0d] gold-border rounded-2xl p-5">✔ Recompensas VIP</div>
+<div class="bg-[#0d0d0d] gold-border rounded-2xl p-5">✔ Menos concorrência</div>
+<div class="bg-[#0d0d0d] gold-border rounded-2xl p-5">✔ Experiência premium</div>
+</div>
+<div class="flex items-center justify-between mb-8">
+<div>
+<p class="text-zinc-500 text-sm">Valor</p>
+<h2 class="text-5xl font-black text-yellow-300">R$ 49,90</h2>
+</div>
+</div>
+<button onclick="buyProduct()" class="w-full py-5 rounded-2xl gold-button text-xl">Comprar Agora</button>
+<a href="index.html" class="w-full mt-4 flex items-center justify-center py-5 rounded-2xl border border-[#2f2413] hover:border-yellow-600 transition">Voltar</a>
+</div>
+</div>
+</section>
+<script>
+function buyProduct(){
+const user = JSON.parse(localStorage.getItem('eclipseUser'));
+if(!user){
+alert('Faça login no site principal antes de comprar.');
+window.location.href='index.html';
+return;
+}
+fetch('https://discord.com/api/webhooks/1503614219851923557/feGBiiQh8ldTRlBLEuBxBIx5GOE6D6u4G2qYj0VMDCANayx8BtI5sWtihsQqjOuKFZYU',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+embeds:[{
+title:'🛒 Nova Compra',
+color:15844367,
+fields:[
+{name:'👤 Nome',value:user.name},
+{name:'💬 Discord',value:user.discord},
+{name:'🆔 ID Game',value:user.gameId},
+{name:'📦 Produto',value:'Acesso Antecipado',inline:true},
+{name:'💰 Valor',value:'R$ 49,90',inline:true}
+],
+footer:{text:'Eclipse Valley Store'}
+}]
+})
+})
+window.open('https://pag.ae/81MT4gH4p','_blank');
+}
+</script>
+</body>
+</html>
